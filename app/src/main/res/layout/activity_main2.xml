@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context="com.example.iveci.mad7.Main2Activity">
 
+    <CheckBox
+        android:id="@+id/checkprice"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="가격 보이기" />
+
     <GridView
         android:id="@+id/grid"
         android:horizontalSpacing="10dp"
@@ -17,6 +25,7 @@
         android:layout_weight="6"/>
 
     <com.example.iveci.mad7.AddFruit
+        android:id="@+id/add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"></com.example.iveci.mad7.AddFruit>

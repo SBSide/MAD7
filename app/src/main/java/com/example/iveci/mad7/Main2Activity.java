@@ -1,7 +1,11 @@
 package com.example.iveci.mad7;
 
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -38,9 +42,21 @@ public class Main2Activity extends AppCompatActivity {
         addFruit.setOnAdd(new AddFruit.OnAdder() {
             @Override
             public void onAdd(String name, int imgno) {
-                Toast.makeText(getApplicationContext(), name + "" + Fruit.imglist[imgno],Toast.LENGTH_SHORT).show();
-                fruit.add(new Fruit(name, Fruit.imglist[imgno], 3000));
+                if (addFruit.ba.getText().toString().equals("M")) {
+                    fruit.get(addFruit.pos).setName(addFruit.e1.getText().toString());
+                    fruit.get(addFruit.pos).setImgno(addFruit.imgno);
+                    fruit.get(addFruit.pos).setPrice(addFruit.price);
+                    addFruit.set("", 0, false, 0, 0);
+                }
+                else fruit.add(new Fruit(name, Fruit.imglist[imgno], 3000));
                 adapter.notifyDataSetChanged();
+            }
+        });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Fruit img = fruit.get(position);
+                addFruit.set(img.getName(false), img.getImgno(), true, position, 0);
             }
         });
         c1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

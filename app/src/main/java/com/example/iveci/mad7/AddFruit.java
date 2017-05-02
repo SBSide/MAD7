@@ -1,6 +1,7 @@
 package com.example.iveci.mad7;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.LinearLayout;
 
 public class AddFruit extends LinearLayout implements View.OnClickListener{
     int imgno = 0;
+    int pos = 0;
+    int price = 0;
     EditText e1;
     ImageView i1;
     Button bn, ba;
@@ -32,6 +35,15 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
         ba = (Button) findViewById(R.id.b_add);
         bn.setOnClickListener(this);
         ba.setOnClickListener(this);
+    }
+
+    public void set(String fname, int img, Boolean modmode, int position, int pri) {
+        e1.setText(fname);
+        imgno = img;
+        pos = position;
+        price = pri;
+        i1.setImageResource(imgno);
+        ba.setText(modmode ? "M" : "ADD");
     }
 
     @Override

@@ -18,6 +18,18 @@ public class Fruit {
         this.price = price;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImgno(int imgno) {
+        this.imgno = imgno;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public String getName(boolean check) {
         if (check) return name + " / " + price;
         else return name;

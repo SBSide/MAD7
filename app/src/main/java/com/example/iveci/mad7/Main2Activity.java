@@ -1,9 +1,7 @@
 package com.example.iveci.mad7;
 
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,23 +31,27 @@ public class Main2Activity extends AppCompatActivity {
                 android.R.layout.simple_dropdown_item_1line, Fruit.namelist));
         gridView = (GridView) findViewById(R.id.grid);
         c1 = (CheckBox) findViewById(R.id.checkprice);
-        fruit.add(new Fruit("아보카도", 0, 5000));
-        fruit.add(new Fruit("바나나", 1, 1000));
-        fruit.add(new Fruit("체리", 2, 2000));
-        fruit.add(new Fruit("크랜베리", 3, 3000));
+        fruit.add(new Fruit("아보카도", 0, "5000"));
+        fruit.add(new Fruit("바나나", 1, "1000"));
+        fruit.add(new Fruit("체리", 2, "2000"));
+        fruit.add(new Fruit("크랜베리", 3, "3000"));
         adapter = new GridAdapter(this, fruit);
         gridView.setAdapter(adapter);
         addFruit = (AddFruit) findViewById(R.id.add);
         addFruit.setOnAdd(new AddFruit.OnAdder() {
             @Override
-            public void onAdd(String name, int imgno) {
+            public void onAdd(String name, int imgno, String price) {
                 if (addFruit.ba.getText().toString().equals("M")) {
-                    fruit.get(addFruit.pos).setName(addFruit.e1.getText().toString());
-                    fruit.get(addFruit.pos).setImgno(addFruit.imgno);
-                    fruit.get(addFruit.pos).setPrice(addFruit.price);
-                    addFruit.set("", 0, false, 0, 0);
+                    fruit.get(addFruit.pos).setName(name);
+                    fruit.get(addFruit.pos).setImgno(imgno);
+                    fruit.get(addFruit.pos).setPrice(price);
+                    Toast.makeText(getApplicationContext(),"정보가 수정되었습니다.",Toast.LENGTH_SHORT).show();
                 }
-                else fruit.add(new Fruit(name, imgno, 3000));
+                else {
+                    fruit.add(new Fruit(name, imgno, price));
+                    Toast.makeText(getApplicationContext(),"과일이 추가되었습니다.",Toast.LENGTH_SHORT).show();
+                }
+                addFruit.set("", "", 0, false, 0);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -57,7 +59,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Fruit img = fruit.get(position);
-                addFruit.set(img.getName(false), img.getImgno(), true, position, 0);
+                addFruit.set(img.getName(false), img.getPrice(), img.getImgno(), true, position);
             }
         });
         c1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

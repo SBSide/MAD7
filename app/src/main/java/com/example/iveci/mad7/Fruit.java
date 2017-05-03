@@ -5,14 +5,14 @@ package com.example.iveci.mad7;
  */
 
 public class Fruit {
-    public static String namelist[] = {"아보카도", "바나나", "체리", "크랜베리", "포도", "키위"};
+    public static String namelist[] = {"아보카도", "바나나", "체리", "크랜베리", "포도", "키위", "오렌지", "수박"};
     public static int imglist[] = {R.drawable.abocado, R.drawable.banana, R.drawable.cherry,
-            R.drawable.cranberry, R.drawable.grape, R.drawable.kiwi};
+            R.drawable.cranberry, R.drawable.grape, R.drawable.kiwi, R.drawable.orange, R.drawable.watermelon};
     private String name;
     private int imgno = 0;
-    private int price = 0;
+    private String price;
 
-    public Fruit(String name, int imgno, int price) {
+    public Fruit(String name, int imgno, String price) {
         this.name = name;
         this.imgno = imgno;
         this.price = price;
@@ -26,7 +26,7 @@ public class Fruit {
         this.imgno = imgno;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -39,7 +39,7 @@ public class Fruit {
         return imgno;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 

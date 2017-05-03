@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 public class AddFruit extends LinearLayout implements View.OnClickListener{
     int imgno = 0;
     int pos = 0;
-    int price = 0;
-    EditText e1;
+    String price;
+    EditText e1,e2;
     ImageView i1;
     Button bn, ba;
 
@@ -30,6 +30,7 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
     void init(Context context){
         LayoutInflater.from(context).inflate(R.layout.fruitadd,this);
         e1 = (EditText) findViewById(R.id.f_name);
+        e2 = (EditText) findViewById(R.id.f_pri);
         i1 = (ImageView) findViewById(R.id.image1);
         bn = (Button) findViewById(R.id.b_next);
         ba = (Button) findViewById(R.id.b_add);
@@ -37,11 +38,11 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
         ba.setOnClickListener(this);
     }
 
-    public void set(String fname, int img, Boolean modmode, int position, int pri) {
+    public void set(String fname, String fpri, int img, Boolean modmode, int position) {
         e1.setText(fname);
+        e2.setText(fpri);
         imgno = img;
         pos = position;
-        price = pri;
         i1.setImageResource(Fruit.imglist[imgno]);
         ba.setText(modmode ? "M" : "ADD");
     }
@@ -56,12 +57,12 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
             else i1.setImageResource(Fruit.imglist[++imgno]);
         }
         else {
-            onAdd.onAdd(e1.getText().toString(), imgno);
+            onAdd.onAdd(e1.getText().toString(), imgno, e2.getText().toString());
         }
     }
 
     interface OnAdder {
-        void onAdd(String name, int imgno);
+        void onAdd(String name, int imgno, String price);
     }
 
     public OnAdder onAdd;

@@ -27,15 +27,16 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        setTitle("What is your favorite fruit?");
         adt = (AutoCompleteTextView) findViewById(R.id.f_name);
         adt.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, Fruit.namelist));
         gridView = (GridView) findViewById(R.id.grid);
         c1 = (CheckBox) findViewById(R.id.checkprice);
-        fruit.add(new Fruit("아보카도", Fruit.imglist[0], 5000));
-        fruit.add(new Fruit("바나나", Fruit.imglist[1], 1000));
-        fruit.add(new Fruit("체리", Fruit.imglist[2], 2000));
-        fruit.add(new Fruit("크랜베리", Fruit.imglist[3], 3000));
+        fruit.add(new Fruit("아보카도", 0, 5000));
+        fruit.add(new Fruit("바나나", 1, 1000));
+        fruit.add(new Fruit("체리", 2, 2000));
+        fruit.add(new Fruit("크랜베리", 3, 3000));
         adapter = new GridAdapter(this, fruit);
         gridView.setAdapter(adapter);
         addFruit = (AddFruit) findViewById(R.id.add);
@@ -48,7 +49,7 @@ public class Main2Activity extends AppCompatActivity {
                     fruit.get(addFruit.pos).setPrice(addFruit.price);
                     addFruit.set("", 0, false, 0, 0);
                 }
-                else fruit.add(new Fruit(name, Fruit.imglist[imgno], 3000));
+                else fruit.add(new Fruit(name, imgno, 3000));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -62,7 +63,7 @@ public class Main2Activity extends AppCompatActivity {
         c1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                adapter.setVisible(isChecked);
             }
         });
     }

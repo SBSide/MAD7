@@ -42,7 +42,7 @@ public class AddFruit extends LinearLayout implements View.OnClickListener{
         imgno = img;
         pos = position;
         price = pri;
-        i1.setImageResource(imgno);
+        i1.setImageResource(Fruit.imglist[imgno]);
         ba.setText(modmode ? "M" : "ADD");
     }
 

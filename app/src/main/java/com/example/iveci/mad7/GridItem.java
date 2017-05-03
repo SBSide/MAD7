@@ -28,7 +28,7 @@ public class GridItem extends LinearLayout{
 
     public void setData(Fruit one, boolean visible) {
         t1.setText(one.getName(visible));
-        i1.setImageResource(one.getImgno());
+        i1.setImageResource(Fruit.imglist[one.getImgno()]);
 
     }
 }

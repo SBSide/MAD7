@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class GridAdapter extends BaseAdapter {
     Context context;
     ArrayList<Fruit> fruit;
+    Boolean visible = false;
 
     public GridAdapter(Context context, ArrayList<Fruit> fruit) {
         this.context = context;
@@ -30,6 +31,11 @@ public class GridAdapter extends BaseAdapter {
         return fruit.get(position);
     }
 
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+        notifyDataSetChanged();
+    }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -40,7 +46,7 @@ public class GridAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = new GridItem(context);
         }
-        ((GridItem)convertView).setData(fruit.get(position), false);
+        ((GridItem)convertView).setData(fruit.get(position), visible);
         return convertView;
     }
 }
